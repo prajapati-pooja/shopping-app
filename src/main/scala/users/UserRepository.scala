@@ -1,13 +1,18 @@
 package users
 
+import com.google.inject.Inject
 import commons.db.DbClient
 import commons.models.ErrorBody
+import javax.inject.Singleton
 import play.api.libs.json.JsValue
 
 import scala.concurrent.Future
 import scala.util.{Failure, Success, Try}
 
-class UserRepository(dbClient: DbClient) {
+trait Repository
+
+@Singleton
+class UserRepository @Inject()(dbClient: DbClient) extends Repository {
 
   def getUsers: Future[Either[ErrorBody, Seq[User]]] = {
     import app.AppConfig.executionContext

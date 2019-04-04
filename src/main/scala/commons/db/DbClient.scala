@@ -1,10 +1,12 @@
 package commons.db
 
+import javax.inject.Singleton
 import org.mongodb.scala.{Document, MongoClient, MongoDatabase}
 import play.api.libs.json.{JsValue, Json}
 
 import scala.concurrent.Future
 
+@Singleton
 class DbClient {
   private val dbConnection = "mongodb://localhost:27017"
   private val dbName = "test"
