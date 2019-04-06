@@ -1,4 +1,4 @@
-package app
+package com.shopping.app
 
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer

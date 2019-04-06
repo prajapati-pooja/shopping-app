@@ -1,8 +1,8 @@
-package users
+package com.shopping.users
 
 import com.google.inject.Inject
-import commons.db.DbClient
-import commons.models.ErrorBody
+import com.shopping.commons.db.DbClient
+import com.shopping.commons.models.ErrorBody
 import javax.inject.Singleton
 import org.mongodb.scala.Completed
 import play.api.libs.json.{JsValue, Json}
@@ -16,7 +16,7 @@ trait Repository
 class UserRepository @Inject()(dbClient: DbClient) extends Repository {
 
   def getUsers: Future[Either[ErrorBody, Seq[User]]] = {
-    import app.AppConfig.executionContext
+    import com.shopping.app.AppConfig.executionContext
 
     val eventualUsers: Future[Seq[JsValue]] = dbClient.getUserCollection
 

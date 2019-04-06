@@ -1,8 +1,8 @@
-package app
+package com.shopping.app
 
 import akka.http.scaladsl.Http
 import com.google.inject.Guice.createInjector
-import users.{UserModule, UsersRoute}
+import com.shopping.users.{UserModule, UsersRoute}
 
 object Application extends App {
   import AppConfig._

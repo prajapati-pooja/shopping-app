@@ -1,4 +1,4 @@
-package commons.db
+package com.shopping.commons.db
 
 import javax.inject.Singleton
 import org.mongodb.scala.{Completed, Document, MongoClient, MongoDatabase, Observer, SingleObservable}

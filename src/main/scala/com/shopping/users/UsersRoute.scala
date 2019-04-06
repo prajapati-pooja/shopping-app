@@ -1,10 +1,10 @@
-package users
+package com.shopping.users
 
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import com.google.inject.Inject
 import de.heikoseeberger.akkahttpplayjson.PlayJsonSupport
-import users.User.userFormat
+import com.shopping.users.User.userFormat
 
 class UsersRoute @Inject()(userService: UserService) extends PlayJsonSupport {
   val routes: Route = {

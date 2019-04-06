@@ -1,4 +1,4 @@
-package users
+package com.shopping.users
 
 import com.google.inject.AbstractModule
 

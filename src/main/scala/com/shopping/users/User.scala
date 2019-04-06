@@ -1,4 +1,4 @@
-package users
+package com.shopping.users
 
 import play.api.libs.json.{Json, OFormat}
 

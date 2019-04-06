@@ -1,10 +1,10 @@
-package users
+package com.shopping.users
 
 import com.google.inject.{Inject, Singleton}
-import commons.models.ErrorBody
+import com.shopping.commons.models.ErrorBody
 
 import scala.concurrent.Future
-import app.AppConfig._
+import com.shopping.app.AppConfig._
 
 @Singleton
 class UserService @Inject()(repository: UserRepository) {

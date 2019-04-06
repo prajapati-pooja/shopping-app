@@ -1,4 +1,4 @@
-package commons.models
+package com.shopping.commons.models
 
 import play.api.libs.json.{Json, OFormat}
 
