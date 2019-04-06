@@ -12,7 +12,7 @@ class UsersRoute @Inject()(userService: UserService) extends PlayJsonSupport {
       get {
         parameter('age.as[Int].?) { age =>
           {
-            val eventualUsers = userService.getUsers(validate(age))
+            val eventualUsers = userService.getUsers(age)
             onSuccess(eventualUsers) {
               case Right(users) => complete(users)
               case Left(error)  => complete(error)
@@ -23,7 +23,4 @@ class UsersRoute @Inject()(userService: UserService) extends PlayJsonSupport {
     }
   }
 
-  private def validate(age: Option[Int]): Option[Int] = {
-    age.map(_.toString.trim).filter(_.length != 0).map(_.toInt)
-  }
 }
