@@ -5,7 +5,6 @@ import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.testkit._
 import com.shopping.BaseTest
 import de.heikoseeberger.akkahttpplayjson.PlayJsonSupport
-import org.mockito.ArgumentMatchers.any
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future.successful
@@ -33,7 +32,7 @@ class UsersRouteTest
                     "1278993065",
                     "some random address",
                     List("pizza"))
-    when(service.getUsers(None)).thenReturn(successful(Right(Seq(user))))
+    when(service.getUsers(UserParams(None, None, None))).thenReturn(successful(Right(Seq(user))))
 
     Get("/users") ~> userRoutes.routes ~> check {
       status shouldEqual StatusCodes.OK
@@ -48,7 +47,7 @@ class UsersRouteTest
                            "1278993065",
                            "some random address",
                            List("pizza"))
-    when(service.getUsers(Some(24)))
+    when(service.getUsers(UserParams(Some(24), None, None)))
       .thenReturn(successful(Right(Seq(userOfAge24))))
 
     Get("/users?age=24") ~> userRoutes.routes ~> check {

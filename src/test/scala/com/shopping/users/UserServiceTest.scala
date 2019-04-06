@@ -34,7 +34,7 @@ class UserServiceTest extends BaseTest with PlayJsonSupport {
     when(repository.getUsers).thenReturn(successful(Right(Seq(user1, user2))))
 
     val mayBeUsers =
-      Await.result(service.getUsers(Some(24)), Duration(3, TimeUnit.SECONDS))
+      Await.result(service.getUsers(UserParams(Some(24), None, None)), Duration(3, TimeUnit.SECONDS))
 
     mayBeUsers.right.get should contain(user2)
   }
@@ -55,7 +55,7 @@ class UserServiceTest extends BaseTest with PlayJsonSupport {
     when(repository.getUsers).thenReturn(successful(Right(Seq(user1, user2))))
 
     val mayBeUsers =
-      Await.result(service.getUsers(None), Duration(3, TimeUnit.SECONDS))
+      Await.result(service.getUsers(UserParams(None, None, None)), Duration(3, TimeUnit.SECONDS))
 
     mayBeUsers.right.get shouldEqual Seq(user1, user2)
   }
