@@ -26,14 +26,14 @@ class UsersRouteTest
   }
 
   test(
-    "should return 200 with com.shopping.users when repo return successful response") {
+    "should return all users when age have not been passed to service") {
     val user = User("pooja",
                     25,
                     "jewoi@example.com",
                     "1278993065",
                     "some random address",
                     List("pizza"))
-    when(service.getUsers(any())).thenReturn(successful(Right(Seq(user))))
+    when(service.getUsers(None)).thenReturn(successful(Right(Seq(user))))
 
     Get("/users") ~> userRoutes.routes ~> check {
       status shouldEqual StatusCodes.OK
@@ -41,7 +41,7 @@ class UsersRouteTest
     }
   }
 
-  test("should return com.shopping.users of age 24") {
+  test("should return users of age 24 when age have been passed to service") {
     val userOfAge24 = User("pooja",
                            24,
                            "jewoi@example.com",

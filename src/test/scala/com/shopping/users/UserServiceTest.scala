@@ -18,7 +18,7 @@ class UserServiceTest extends BaseTest with PlayJsonSupport {
     service = new UserService(repository)
   }
 
-  test("should return com.shopping.users of age 24") {
+  test("should return users of age 24") {
     val user1 = User("pooja",
                      25,
                      "jewoi@example.com",
@@ -39,7 +39,7 @@ class UserServiceTest extends BaseTest with PlayJsonSupport {
     mayBeUsers.right.get should contain(user2)
   }
 
-  test("should return all com.shopping.users") {
+  test("should return all users") {
     val user1 = User("pooja",
                      25,
                      "jewoi@example.com",

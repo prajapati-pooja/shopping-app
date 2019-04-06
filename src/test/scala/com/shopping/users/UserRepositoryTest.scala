@@ -20,7 +20,7 @@ class UserRepositoryTest extends BaseTest {
     userRepository = new UserRepository(dbClient)
   }
 
-  test("should return list of com.shopping.users") {
+  test("should return list of users") {
     val json = Json.obj("name" -> "pooja",
                         "age" -> 25,
                         "email" -> "jewoi@example.com",
@@ -43,7 +43,7 @@ class UserRepositoryTest extends BaseTest {
                                           List("pizza"))
   }
 
-  test("should not return list of com.shopping.users in case of parsing error") {
+  test("should not return list of users in case of parsing error") {
     val json = Json.obj("name" -> "pooja")
     when(dbClient.getUserCollection)
       .thenReturn(Future.successful(Seq(json.as[JsValue])))
@@ -55,7 +55,7 @@ class UserRepositoryTest extends BaseTest {
     users.left.get shouldEqual ErrorBody("parsing error", "JsError.get")
   }
 
-  test("should insert com.shopping.users") {
+  test("should insert users") {
     userRepository.insertUsers(userList)
     Mockito.verify(dbClient).insertUser(_)
   }
