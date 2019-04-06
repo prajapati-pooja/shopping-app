@@ -4,7 +4,8 @@ import com.google.inject.Inject
 import commons.db.DbClient
 import commons.models.ErrorBody
 import javax.inject.Singleton
-import play.api.libs.json.JsValue
+import org.mongodb.scala.Completed
+import play.api.libs.json.{JsValue, Json}
 
 import scala.concurrent.Future
 import scala.util.{Failure, Success, Try}
@@ -26,5 +27,9 @@ class UserRepository @Inject()(dbClient: DbClient) extends Repository {
           Left(ErrorBody("parsing error", throwable.getMessage))
       }
     })
+  }
+
+  def insertUsers(users: List[User]): List[Future[Completed]] = {
+    users.map(user => dbClient.insertUser(Json.toJson(user)))
   }
 }

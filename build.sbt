@@ -14,7 +14,7 @@ libraryDependencies ++= {
     "com.typesafe.akka" %% "akka-stream-testkit" % "2.5.19",
     "com.typesafe.akka" %% "akka-http-testkit"    % "10.1.8"   % "test",
     "org.scalatest"     %% "scalatest"       % "3.0.5"       % "test",
-    "org.mongodb.scala" %% "mongo-scala-driver" % "2.6.0",
+    "org.mongodb.scala" %% "mongo-scala-driver" % "2.3.0",
     "org.mongodb.scala" %% "mongo-scala-bson" % "2.6.0",
     "org.mockito"       %% "mockito-scala" % "1.1.1",
     "com.google.inject" % "guice"       % "4.2.1",
