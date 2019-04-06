@@ -7,9 +7,7 @@ case class User(name: String,
                 email: String,
                 phoneNumber: String,
                 address: String,
-                order: List[String]
-               ) {
-}
+                order: List[String]) {}
 
 object User {
   implicit val userFormat: OFormat[User] = Json.format[User]

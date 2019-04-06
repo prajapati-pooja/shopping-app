@@ -11,7 +11,8 @@ object Application extends App {
   private val port = 9000
 
   private val module = new UserModule
-  private val userRoutes: UsersRoute = createInjector(module).getInstance(classOf[UsersRoute])
+  private val userRoutes: UsersRoute =
+    createInjector(module).getInstance(classOf[UsersRoute])
 
   Http().bindAndHandle(userRoutes.routes, host, port)
 }

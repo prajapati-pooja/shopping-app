@@ -1,7 +1,7 @@
 package com.shopping.commons.db
 
 import javax.inject.Singleton
-import org.mongodb.scala.{Completed, Document, MongoClient, MongoDatabase, Observer, SingleObservable}
+import org.mongodb.scala.{Completed, Document, MongoClient, MongoDatabase}
 import play.api.libs.json.{JsValue, Json}
 
 import scala.concurrent.Future
@@ -23,7 +23,9 @@ class DbClient {
   }
 
   def insertUser(json: JsValue): Future[Completed] = {
-    db.getCollection(userCollectionName).insertOne(Document.apply(json.toString())).toFuture()
+    db.getCollection(userCollectionName)
+      .insertOne(Document.apply(json.toString()))
+      .toFuture()
   }
 
 }
