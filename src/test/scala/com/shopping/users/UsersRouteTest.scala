@@ -24,15 +24,15 @@ class UsersRouteTest
 
   }
 
-  test(
-    "should return all users when age have not been passed to service") {
+  test("should return all users when age have not been passed to service") {
     val user = User("pooja",
                     25,
                     "jewoi@example.com",
                     "1278993065",
                     "some random address",
                     List("pizza"))
-    when(service.getUsers(UserParams(None, None, None))).thenReturn(successful(Right(Seq(user))))
+    when(service.getUsers(UserParams(None, None, None)))
+      .thenReturn(successful(Right(Seq(user))))
 
     Get("/users") ~> userRoutes.routes ~> check {
       status shouldEqual StatusCodes.OK
@@ -53,6 +53,28 @@ class UsersRouteTest
     Get("/users?age=24") ~> userRoutes.routes ~> check {
       status shouldEqual StatusCodes.OK
       responseAs[Seq[User]] shouldEqual Seq(userOfAge24)
+    }
+  }
+
+  test("should sort users in descending order based on their age") {
+    val user1 = User("pooja",
+                     24,
+                     "jewoi@example.com",
+                     "1278993065",
+                     "some random address",
+                     List("pizza"))
+    val user2 = User("pooja",
+                     25,
+                     "jewoi@example.com",
+                     "1278993065",
+                     "some random address",
+                     List("pizza"))
+    when(service.getUsers(UserParams(Some(24), Some("AGE"), Some("DESC"))))
+      .thenReturn(successful(Right(Seq(user2, user1))))
+
+    Get("/users?age=24&sortBy=age&sortOrder=desc") ~> userRoutes.routes ~> check {
+      status shouldEqual StatusCodes.OK
+      responseAs[Seq[User]] shouldEqual Seq(user2, user1)
     }
   }
 
