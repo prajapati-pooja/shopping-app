@@ -10,10 +10,9 @@ import play.api.libs.json.{JsValue, Json}
 import scala.concurrent.Future
 import scala.util.{Failure, Success, Try}
 
-trait Repository
 
 @Singleton
-class UserRepository @Inject()(dbClient: DbClient) extends Repository {
+class UserRepository @Inject()(dbClient: DbClient) {
 
   def getUsers: Future[Either[ErrorBody, Seq[User]]] = {
     import com.shopping.app.AppConfig.executionContext
