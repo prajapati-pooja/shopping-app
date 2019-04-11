@@ -21,6 +21,15 @@ class UserService @Inject()(repository: UserRepository) {
     })
   }
 
+  def getTotalOrders: Future[Either[ErrorBody, List[String]]] = {
+    val users = getUsers(UserParams(None, None, None))
+    users.map(mayBeUsers => {
+      mayBeUsers.map(allUser => {
+        allUser.flatMap(user => user.order).toList
+      })
+    })
+  }
+
   private def sortUsers(params: UserParams, users: Seq[User]): Seq[User] = {
     val sortByField: Option[User => Int] =
       params.sortBy.flatMap(s => extract(s))

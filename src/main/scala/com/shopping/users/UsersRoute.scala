@@ -20,7 +20,17 @@ class UsersRoute @Inject()(userService: UserService) extends PlayJsonSupport {
           }
         }
       }
-    }
+    } ~
+      path("users" / "totalorders") {
+        get {
+          val totalOrders = userService.getTotalOrders
+          onSuccess(totalOrders) {
+            case Right(orders) => complete(orders)
+            case Left(error)   => complete(error)
+          }
+        }
+      }
+
   }
 
   def extractParam: Directive1[UserParams] = {

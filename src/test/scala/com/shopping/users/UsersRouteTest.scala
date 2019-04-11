@@ -78,4 +78,26 @@ class UsersRouteTest
     }
   }
 
+  test("should get total orders of all the users") {
+    val user1 = User("pooja",
+                     24,
+                     "jewoi@example.com",
+                     "1278993065",
+                     "some random address",
+                     List("pizza"))
+    val user2 = User("pooja",
+                     25,
+                     "jewoi@example.com",
+                     "1278993065",
+                     "some random address",
+                     List("pizza"))
+    when(service.getTotalOrders)
+      .thenReturn(successful(Right(List("pizza", "Maggie"))))
+
+    Get("/users/totalorders") ~> userRoutes.routes ~> check {
+      status shouldEqual StatusCodes.OK
+      responseAs[Seq[String]] shouldEqual List("pizza", "Maggie")
+    }
+  }
+
 }

@@ -129,4 +129,26 @@ class UserServiceTest extends BaseTest with PlayJsonSupport {
     mayBeUsers.right.get shouldEqual Seq(user2, user1)
   }
 
+  test("get total orders of all the users") {
+    val user1 = User("pooja",
+                     25,
+                     "jewoi@example.com",
+                     "1278993065",
+                     "some random address",
+                     List("pizza", "Burgor"))
+    val user2 = User("pooja",
+                     24,
+                     "jewoi@example.com",
+                     "1278993065",
+                     "some random address",
+                     List("pasta", "Maggie"))
+    when(repository.getUsers).thenReturn(successful(Right(Seq(user1, user2))))
+
+    val mayBeUsers =
+      Await.result(service.getTotalOrders,
+                   Duration(3, TimeUnit.SECONDS))
+
+    mayBeUsers.right.get shouldEqual Seq("pizza", "Burgor", "pasta", "Maggie")
+  }
+
 }
